@@ -1,61 +1,60 @@
-const resultInput = document.getElementById('result');
-let currentExpression = '';
+const resultInput = document.getElementById("result");
+let currentExpression = "";
+//計算記号が入る変数
+let operator = "";
+const numberButtons = document.querySelectorAll(".number");
+const operatorButtons = document.querySelectorAll(".operator");
+const clearButton = document.getElementById("clear");
+const calculateButton = document.getElementById("calculate");
+let num1 = "";
+let num2 = "";
+let displayNum = "";
+let flag = false;
 
-const numberButtons = document.querySelectorAll('.number');
-const operatorButtons = document.querySelectorAll('.operator');
-const clearButton = document.getElementById('clear');
-const calculateButton = document.getElementById('calculate');
-
-numberButtons.forEach(button => {
-  button.addEventListener('click', () => {
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
     const number = button.textContent;
-    appendNumber(number);
+    if (!flag) {
+      console.log(number);
+      displayNum = displayNum + number;
+      num1 = num1 + number;
+
+      resultInput.value = num1;
+    } else {
+      displayNum = displayNum + number;
+      num2 = num2 + number;
+      resultInput.value = displayNum;
+    }
   });
 });
 
-operatorButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const operator = button.textContent;
-    appendOperator(operator);
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    operator = button.textContent;
+    operatorIfFunc(operator);
   });
 });
-
-clearButton.addEventListener('click', clearResult);
-
-calculateButton.addEventListener('click', calculate);
-
-function appendNumber(number) {
-  // 小数点から始まる少数を受け付けた場合、0.に変換する
-  if (currentExpression === '' && number === '.') {
-    currentExpression = '0.';
-  } else {
-    currentExpression = currentExpression + number;
+function operatorIfFunc(operator) {
+  if (flag != false) {
+    console.error("連続して演算記号を入力することはできません");
+    return;
   }
-  resultInput.value = currentExpression;
+  if (operator == "+") {
+    flag = true;
+    displayNum = displayNum + operator;
+    resultInput.value = displayNum;
+  } else {
+  }
 }
 
-function appendOperator(operator) {
-  currentExpression = currentExpression + operator;
-  resultInput.value = currentExpression;
-}
+calculateButton.addEventListener("click", () => {
+  calculate();
+});
 
 function calculate() {
-  if (currentExpression !== '') {
-    const expression = currentExpression.replace(/÷/g, '/');
-    const replacedExpression = expression.replace(/×/g, '*');
-    try {
-      const calculateExpression = new String(`${replacedExpression}`);
-      const result = calculateExpression.toString()
-      resultInput.value = result;
-      currentExpression = '';
-    } catch (error) {
-      resultInput.value = 'Error';
-      result = ""
-    }
+  if (operator == "+") {
+    result = Number(num1) + Number(num2);
+    console.log("a" + result);
+    resultInput.value = result;
   }
-}
-
-function clearResult() {
-  currentExpression = '';
-  resultInput.value = '';
 }
