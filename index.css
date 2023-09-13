@@ -1,7 +1,3 @@
-.item:hover:not(:empty) {
-  background-color: #ddd;
-}
-
 h1 {
   text-align: center;
 }
