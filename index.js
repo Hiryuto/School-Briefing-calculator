@@ -13,10 +13,18 @@ let result = 0;
 //ボタンの数字
 let number = 0;
 
-function numberButtonClick1() {}
+function numberButtonClick1() {
 
-function operatorIfFunc(operator) {}
+}
 
-function numberButtonClick2() {}
+function operatorIfFunc(operator) {
 
-function calculate() {}
+}
+
+function numberButtonClick2() {
+
+}
+
+function calculate() {
+    
+}
