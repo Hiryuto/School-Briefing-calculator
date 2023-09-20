@@ -16,7 +16,6 @@ let number = 0;
 cheat1();
 
 function numberButtonClick1() {
-  console.log(number);
   displayNum = displayNum + number;
   num1 = num1 + number;
   resultInput.value = num1;

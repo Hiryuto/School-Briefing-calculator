@@ -31,7 +31,6 @@ numberButtons.forEach((button) => {
 // 演算子ボタンのイベントリスナー
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log(operatorFlag);
 
     // フラグがfalseでないかをチェックします
     if (flag != false) {
@@ -68,13 +67,11 @@ clearButton.addEventListener("click", () => {
 
 // 計算ボタンのイベントリスナー
 calculateButton.addEventListener("click", () => {
-  console.log(calculateFlag);
   document.getElementById("error").innerHTML = "";
   calculate();
 
   // calculateFlagがtrueかどうかをチェックする
   if (calculateFlag) {
-    console.log(calculateFlag);
     calculateOther();
   } else {
     // calculateFlagがfalseの場合はエラーメッセージを表示する

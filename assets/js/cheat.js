@@ -90,7 +90,6 @@ function cheat1() {
   createAndAppendElementToNewContainer5("item operator", "+");
 }
 function operatorIfFuncOther(operator) {
-  console.log(operator);
   if (operator == "+") {
     return;
   } else if (flag == false && operator == "-") {
