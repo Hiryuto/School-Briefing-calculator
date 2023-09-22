@@ -30,31 +30,31 @@ numberButtons.forEach((button) => {
 
 // 演算子ボタンのイベントリスナー
 operatorButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-
-    // フラグがfalseでないかをチェックします
-    if (flag != false) {
-      document.getElementById("error").innerHTML =
-        "連続して演算記号を入力することはできません";
-      return;
-    } else {
-      // ボタンのテキストコンテンツから演算子を取得します
-      operator = button.textContent;
-
-      // operatorIfFunc関数を呼び出します
-      operatorIfFunc(operator);
-
-      // operatorFlagをチェックし、適切な関数を呼び出します
-      if (operatorFlag) {
-        operatorIfFuncOther(operator);
-      } else {
-        document.getElementById(
-          "error"
-        ).innerHTML = `<p style="color: red">この演算子はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
-      }
+  button.addEventListener("click", ()=>{
+    operator = button.textContent
+    operatorButton(operator)
+  })});
+async function operatorButton(operator) {
+  if (flag) {
+    document.getElementById("error").innerHTML =
+      "連続して演算記号を入力することはできません";
+    return;
+  } else {
+    operatorIfFunc(operator);
+    await sleep(100);
+    const regex = /\+/;
+    const ifValue = document.getElementById("result").value;
+    if (operatorFlag) {
+      operatorIfFuncOther(operator);
+    } else if (!regex.test(ifValue)) {
+      document.getElementById("error").innerHTML = `<p style="color: red">この演算子はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
     }
-  });
-});
+  }
+}
+//sleepをできるようにする
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 // クリアボタンのイベントリスナー
 clearButton.addEventListener("click", () => {
   document.getElementById("error").innerHTML = "";
@@ -69,7 +69,6 @@ clearButton.addEventListener("click", () => {
 calculateButton.addEventListener("click", () => {
   document.getElementById("error").innerHTML = "";
   calculate();
-
   // calculateFlagがtrueかどうかをチェックする
   if (calculateFlag) {
     calculateOther();

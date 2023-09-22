@@ -36,6 +36,7 @@ function numberButtonClick2() {
 }
 
 function calculate() {
+  console.log(operator)
   if (operator == "+") {
     result = Number(num1) + Number(num2);
     resultInput.value = result;
