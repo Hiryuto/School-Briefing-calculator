@@ -1,12 +1,12 @@
 var calculateFlag = false;
 var operatorFlag = false;
-function operatorOtherFlag() {
+function operatorFlag() {
   operatorFlag = true;
 }
-function calculateOtherFlag() {
+function calculateFlag() {
   calculateFlag = true;
 }
-function cheat1() {
+function cheat() {
   const container = document.querySelector(".container4");
   const createAndAppendElement = (className, textContent) => {
     const newElement = document.createElement("div");
@@ -89,47 +89,4 @@ function cheat1() {
   createAndAppendElementToNewContainer5("item", "=", "calculate");
   createAndAppendElementToNewContainer5("item operator", "+");
 }
-function operatorIfFuncOther(operator) {
-  console.log(operator);
-  if (operator == "+") {
-    return;
-  } else if (flag == false && operator == "-") {
-    flag = true;
-    displayNum = displayNum + operator;
-    resultInput.value = displayNum;
-  } else if (flag == false && operator == "×") {
-    flag = true;
-    displayNum = displayNum + operator;
-    resultInput.value = displayNum;
-  } else if (flag == false && operator == "÷") {
-    flag = true;
-    displayNum = displayNum + operator;
-    resultInput.value = displayNum;
-  }
-}
-function calculateOther() {
-  if (operator == "+") {
-    return;
-  } else if (operator == "-") {
-    result = Number(num1) - Number(num2);
-    resultInput.value = result;
-    flag = false;
-    num1 = result;
-    num2 = "";
-    displayNum = result;
-  } else if (operator == "×") {
-    result = Number(num1) * Number(num2);
-    resultInput.value = result;
-    flag = false;
-    num1 = result;
-    num2 = "";
-    displayNum = result;
-  } else if (operator == "÷") {
-    result = Number(num1) / Number(num2);
-    resultInput.value = result;
-    flag = false;
-    num1 = result;
-    num2 = "";
-    displayNum = result;
-  }
-}
+
