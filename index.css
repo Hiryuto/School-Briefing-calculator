@@ -1,3 +1,4 @@
+/* Challenge ボタンにカーソルが乗ったら背景色を変えよう！ */
 .item:hover:not(:empty) {
   background-color: #ddd;
 }
