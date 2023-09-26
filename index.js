@@ -1,27 +1,30 @@
-//計算記号が入る変数
+// 計算記号が入る変数
 let operator = "";
-//入力内容1
-let num1 = "";
-//入力内容2
-let num2 = "";
-//表示内容
+// 入力内容1
+let firstInput = "";
+// 入力内容2
+let secondInput = "";
+// 表示内容
 let displayNum = "";
-//フラグ
+// フラグ
 let flag = false;
-//計算結果
+// 計算結果
 let result = 0;
-//ボタンの数字
+// ボタンの数字
 let number = 0;
 
-cheat1();
+//Mission2 他のボタンを描画する処理を書こう!
+viewButton();
 
 function numberButtonClick1() {
+  //Mission3 ボタンを押した時の処理を書こう！
   displayNum = displayNum + number;
-  num1 = num1 + number;
-  resultInput.value = num1;
+  firstInput = firstInput + number;
+  resultInput.value = firstInput;
 }
 
 function operatorIfFunc(operator) {
+  //Mission4 +の演算子を押した時の処理を書こう!
   if (operator == "+") {
     flag = true;
     displayNum = displayNum + operator;
@@ -31,20 +34,152 @@ function operatorIfFunc(operator) {
 
 function numberButtonClick2() {
   displayNum = displayNum + number;
-  num2 = num2 + number;
+  secondInput = secondInput + number;
   resultInput.value = displayNum;
 }
 
 function calculate() {
-  console.log(operator)
+  //Mission5 =の演算子を押した時の処理を書こう!
   if (operator == "+") {
-    result = Number(num1) + Number(num2);
+    result = Number(firstInput) + Number(secondInput);
     resultInput.value = result;
     flag = false;
-    num1 = result;
-    num2 = "";
+    firstInput = result;
+    secondInput = "";
     displayNum = result;
   }
 }
-operatorOtherFlag();
-calculateOtherFlag();
+
+//Mission6 他のボタンを押した時の処理を書こう!
+operatorFlag();
+calculateFlag();
+
+// 数字ボタンを取得します
+const numberButtons = document.querySelectorAll(".number");
+
+// 演算子ボタンを取得します
+const operatorButtons = document.querySelectorAll(".operator");
+
+// クリアボタンを取得します
+const clearButton = document.getElementById("clear");
+
+// 計算ボタンを取得します
+const calculateButton = document.getElementById("calculate");
+
+// 結果の入力フィールドを取得します
+const resultInput = document.getElementById("result");
+
+// 数字ボタンのイベントリスナー
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // ボタンのテキストコンテンツから数字を取得します
+    number = button.textContent;
+
+    // フラグをチェックし、適切な関数を呼び出します
+    if (!flag) {
+      numberButtonClick1();
+    } else {
+      numberButtonClick2();
+    }
+  });
+});
+
+// 演算子ボタンのイベントリスナー
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", ()=>{
+    operator = button.textContent
+    operatorButton(operator)
+  })});
+
+async function operatorButton(operator) {
+  if (flag) {
+    document.getElementById("error").innerHTML =
+      "連続して演算記号を入力することはできません";
+    return;
+  } else {
+    operatorIfFunc(operator);
+    await sleep(100);
+    const regex = /\+/;
+    const ifValue = document.getElementById("result").value;
+    if (operatorFlags) {
+      operatorIfFuncOther(operator);
+    } else if (!regex.test(ifValue)) {
+      document.getElementById("error").innerHTML = `<p style="color: red">この演算子はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
+    }
+  }
+}
+
+// sleepをできるようにする
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// クリアボタンのイベントリスナー
+clearButton.addEventListener("click", () => {
+  document.getElementById("error").innerHTML = "";
+  firstInput = "";
+  secondInput = "";
+  displayNum = "";
+  flag = false;
+  resultInput.value = "";
+});
+
+// 計算ボタンのイベントリスナー
+calculateButton.addEventListener("click", () => {
+  document.getElementById("error").innerHTML = "";
+  calculate();
+  // calculateFlagがtrueかどうかをチェックする
+  if (calculateFlags) {
+    calculateOther();
+  } else {
+    // calculateFlagがfalseの場合はエラーメッセージを表示する
+    document.getElementById(
+      "error"
+    ).innerHTML = `<p style="color: red">この演算記号はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
+  }
+});
+
+function operatorIfFuncOther(operator) {
+    if (operator == "+") {
+      return;
+    } else if (flag == false && operator == "-") {
+      flag = true;
+      displayNum = displayNum + operator;
+      resultInput.value = displayNum;
+    } else if (flag == false && operator == "×") {
+      flag = true;
+      displayNum = displayNum + operator;
+      resultInput.value = displayNum;
+    } else if (flag == false && operator == "÷") {
+      flag = true;
+      displayNum = displayNum + operator;
+      resultInput.value = displayNum;
+    }
+  }
+  
+function calculateOther() {
+    if (operator == "+") {
+      return;
+    } else if (operator == "-") {
+      result = Number(firstInput) - Number(secondInput);
+      resultInput.value = result;
+      flag = false;
+      firstInput = result;
+      secondInput = "";
+      displayNum = result;
+    } else if (operator == "×") {
+      result = Number(firstInput) * Number(secondInput);
+      resultInput.value = result;
+      flag = false;
+      firstInput = result;
+      secondInput = "";
+      displayNum = result;
+    } else if (operator == "÷") {
+      result = Number(firstInput) / Number(secondInput);
+      resultInput.value = result;
+      flag = false;
+      firstInput = result;
+      secondInput = "";
+      displayNum = result;
+    }
+  }
