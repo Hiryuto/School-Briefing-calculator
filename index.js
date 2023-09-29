@@ -20,7 +20,7 @@ function numberButtonClick1() {
   //Mission3 ボタンを押した時の処理を書こう！
 
   firstInput = firstInput + number;
-  resultInput.value = firstInput;
+  resultInput.value = displayNum;
 }
 
 function operatorIfFunc(operator) {
