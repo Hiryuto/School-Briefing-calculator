@@ -15,6 +15,7 @@ let number = 0;
 
 //Mission2 他のボタンを描画する処理を書こう!
 
+
 function numberButtonClick1() {
   //Mission3 ボタンを押した時の処理を書こう！
 
@@ -23,7 +24,7 @@ function numberButtonClick1() {
 }
 
 function operatorIfFunc(operator) {
-    //Mission4 +の演算子を押した時の処理を書こう!
+  //Mission4 +の演算子を押した時の処理を書こう!
 
     flag = true;
     displayNum = displayNum + operator;
@@ -37,10 +38,8 @@ function numberButtonClick2() {
   resultInput.value = displayNum;
 }
 
-function calculate() {
+function calculate(operator) {
   //Mission5 =の演算子を押した時の処理を書こう!
-
-
     resultInput.value = result;
     flag = false;
     firstInput = result;
@@ -50,6 +49,7 @@ function calculate() {
 }
 
 //Mission6 他のボタンを押した時の処理を書こう!
+
 
 
 // 数字ボタンを取得します
@@ -99,7 +99,7 @@ async function operatorButton(operator) {
     await sleep(100);
     const regex = /\+/;
     const ifValue = document.getElementById("result").value;
-    if (operatorFlag) {
+    if (operatorFlags) {
       operatorIfFuncOther(operator);
     } else if (!regex.test(ifValue)) {
       document.getElementById("error").innerHTML = `<p style="color: red">この演算子はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
@@ -124,18 +124,29 @@ clearButton.addEventListener("click", () => {
 
 // 計算ボタンのイベントリスナー
 calculateButton.addEventListener("click", () => {
+  calculateIF(operator)
+});
+
+async function calculateIF(operator) {
+  
   document.getElementById("error").innerHTML = "";
-  calculate();
+  await sleep(100);
+  const regex = /\+/;
+  const ifValue = document.getElementById("result").value;
   // calculateFlagがtrueかどうかをチェックする
-  if (calculateFlag) {
-    calculateOther();
+  if (regex.test(ifValue)){
+    return calculate(operator)
+  }
+  
+  if (calculateFlags) {
+    calculateOther(operator);
   } else {
     // calculateFlagがfalseの場合はエラーメッセージを表示する
     document.getElementById(
       "error"
     ).innerHTML = `<p style="color: red">この演算記号はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
   }
-});
+}
 
 function operatorIfFuncOther(operator) {
     if (operator == "+") {
@@ -155,7 +166,7 @@ function operatorIfFuncOther(operator) {
     }
   }
   
-function calculateOther() {
+function calculateOther(operator) {
     if (operator == "+") {
       return;
     } else if (operator == "-") {

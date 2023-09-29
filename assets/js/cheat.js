@@ -6,7 +6,7 @@ function operatorFlag() {
 function calculateFlag() {
   calculateFlag = true;
 }
-function cheat() {
+function viewButton() {
   const container = document.querySelector(".container4");
   const createAndAppendElement = (className, textContent) => {
     const newElement = document.createElement("div");
