@@ -100,7 +100,7 @@ async function operatorButton(operator) {
     const regex = /\+/;
     const ifValue = document.getElementById("result").value;
     if (regex.test(ifValue)) {
-      return operatorIfFunc(operator);
+      operatorIfFunc(operator);
     }
     if (operatorFlags) {
       operatorIfFuncOther(operator);
