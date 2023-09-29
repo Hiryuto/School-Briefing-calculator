@@ -97,10 +97,12 @@ async function operatorButton(operator) {
       "連続して演算記号を入力することはできません";
     return;
   } else {
-    operatorIfFunc(operator);
     await sleep(100);
     const regex = /\+/;
     const ifValue = document.getElementById("result").value;
+    if (regex.test(ifValue)) {
+      return operatorIfFunc(operator);
+    }
     if (operatorFlags) {
       operatorIfFuncOther(operator);
     } else if (!regex.test(ifValue)) {
