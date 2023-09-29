@@ -38,7 +38,7 @@ function numberButtonClick2() {
   resultInput.value = displayNum;
 }
 
-function calculate() {
+function calculate(operator) {
   //Mission5 =の演算子を押した時の処理を書こう!
   if (operator == "+") {
     result = Number(firstInput) + Number(secondInput);
@@ -126,18 +126,29 @@ clearButton.addEventListener("click", () => {
 
 // 計算ボタンのイベントリスナー
 calculateButton.addEventListener("click", () => {
+  calculateIF(operator)
+});
+
+async function calculateIF(operator) {
+  
   document.getElementById("error").innerHTML = "";
-  calculate();
+  await sleep(100);
+  const regex = /\+/;
+  const ifValue = document.getElementById("result").value;
   // calculateFlagがtrueかどうかをチェックする
+  if (regex.test(ifValue)){
+    return calculate(operator)
+  }
+  
   if (calculateFlags) {
-    calculateOther();
+    calculateOther(operator);
   } else {
     // calculateFlagがfalseの場合はエラーメッセージを表示する
     document.getElementById(
       "error"
     ).innerHTML = `<p style="color: red">この演算記号はプログラムされていません<br>http://127.0.0.1:3000/index.js</p>`;
   }
-});
+}
 
 function operatorIfFuncOther(operator) {
     if (operator == "+") {
@@ -157,7 +168,7 @@ function operatorIfFuncOther(operator) {
     }
   }
   
-function calculateOther() {
+function calculateOther(operator) {
     if (operator == "+") {
       return;
     } else if (operator == "-") {
