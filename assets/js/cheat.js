@@ -1,10 +1,10 @@
-var calculateFlag = false;
-var operatorFlag = false;
+var calculateFlags = false;
+var operatorFlags = false;
 function operatorFlag() {
-  operatorFlag = true;
+  operatorFlags = true;
 }
 function calculateFlag() {
-  calculateFlag = true;
+  calculateFlags = true;
 }
 function viewButton() {
   const container = document.querySelector(".container4");
