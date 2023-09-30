@@ -95,7 +95,9 @@ async function operatorButton(operator) {
       "連続して演算記号を入力することはできません";
     return;
   } else {
+    if (operator == "+"){
     operatorIfFunc(operator);
+    }
     await sleep(100);
     const regex = /\+/;
     const ifValue = document.getElementById("result").value;
