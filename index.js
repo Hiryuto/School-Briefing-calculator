@@ -27,7 +27,7 @@ function operatorIfFunc(operator) {
   //Mission4 +の演算子を押した時の処理を書こう!
 
     flag = true;
-    displayNum = displayNum + operator;
+    
     resultInput.value = displayNum;
   
 }
